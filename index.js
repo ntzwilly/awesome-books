@@ -81,6 +81,8 @@ form.addEventListener('submit', (event) => {
   const id = generateId();
 
   bookStore.addBook({ title, author, id });
+  form.elements[0].value = '';
+  form.elements[1].value = '';
 });
 
 function addBookToDOM(book) {
