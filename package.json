@@ -1,0 +1,28 @@
+{
+  "name": "awesome-books",
+  "version": "1.0.0",
+  "description": "If you are not familiar with linters, read [root level README](../README.md).",
+  "main": "index.js",
+  "dependencies": {
+    "babel-eslint": "^10.1.0",
+    "eslint": "^7.30.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-plugin-import": "^2.23.4"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "webhint": "npx hint .",
+    "stylelint": "npx stylelint \"**/*.{css,scss}\"",
+    "eslint": "npx eslint ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/usmansbk/awesome-books.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/usmansbk/awesome-books/issues"
+  },
+  "homepage": "https://github.com/usmansbk/awesome-books#readme"
+}

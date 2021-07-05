@@ -21,7 +21,7 @@ function createStore() {
     } else if (action.type === REMOVE_BOOK) {
       state = state.filter((book) => book.id !== action.id);
     } else if (action.type === LOAD_SAVED_DATA) {
-	    state = action.data;
+      state = action.data;
     }
     thingsToUpdate.forEach((fn) => fn());
   };
