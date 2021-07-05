@@ -80,7 +80,7 @@ class BookStore {
 
   loadBooks() {
     const bookshelf = localStorage.getItem(STORAGE_KEY);
-    if (bookshelf) {
+    if (bookshelf && bookshelf !== 'undefined') {
       this.store.update({
         type: LOAD_BOOKS,
         books: JSON.parse(bookshelf),
