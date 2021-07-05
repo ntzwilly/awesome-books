@@ -2,6 +2,7 @@
 
 const ADD_BOOK = 'ADD_BOOK';
 const REMOVE_BOOK = 'REMOVE_BOOK';
+const LOAD_BOOKS = 'LOAD_BOOKS';
 
 function generateId() {
   return Math.floor((1 + Math.random()) * 0x10000)
@@ -14,10 +15,21 @@ function createStore(books = []) {
   const thingsToUpdate = [];
 
   const update = (action) => {
-    if (action.type === ADD_BOOK) {
-      state = state.concat([action.book]);
-    } else if (action.type === REMOVE_BOOK) {
-      state = state.filter((book) => book.id !== action.id);
+    switch (action.type) {
+      case ADD_BOOK: {
+        state = [...state, action.book];
+        break;
+      }
+      case REMOVE_BOOK: {
+        state = state.filter((book) => book.id !== action.id);
+        break;
+      }
+      case LOAD_BOOKS: {
+        state = action.data;
+        break;
+      }
+      default:
+        break;
     }
     thingsToUpdate.forEach((callback) => callback());
   };
@@ -37,10 +49,7 @@ const STORAGE_KEY = 'bookshelf';
 
 class BookStore {
   constructor() {
-    // Check for saved books
-    const bookshelf = localStorage.getItem(STORAGE_KEY);
-    const store = createStore(bookshelf ? JSON.parse(bookshelf) : []);
-    // Persist books on page reload
+    const store = createStore();
     store.onUpdate(() => {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(store.getState()));
     });
@@ -67,6 +76,16 @@ class BookStore {
 
   onUpdate(callback) {
     this.store.onUpdate(callback);
+  }
+
+  loadBooks() {
+    const bookshelf = localStorage.getItem(STORAGE_KEY);
+    if (bookshelf) {
+      this.store.update({
+        type: LOAD_BOOKS,
+        data: JSON.parse(bookshelf),
+      });
+    }
   }
 }
 
@@ -107,10 +126,12 @@ function addBookToDOM(book) {
   list.appendChild(node);
 }
 
+bookStore.onUpdate(() => {
+  list.innerHTML = '';
+  const { books } = bookStore;
+  books.forEach(addBookToDOM);
+});
+
 window.addEventListener('load', () => {
-  bookStore.onUpdate(() => {
-    list.innerHTML = '';
-    const { books } = bookStore;
-    books.forEach(addBookToDOM);
-  });
+  bookStore.loadBooks();
 });
