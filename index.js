@@ -12,7 +12,7 @@ function generateId() {
 
 function createStore(books = []) {
   let state = books;
-  const thingsToUpdate = [];
+  const subscribers = [];
 
   const update = (action) => {
     switch (action.type) {
@@ -31,12 +31,12 @@ function createStore(books = []) {
       default:
         break;
     }
-    thingsToUpdate.forEach((callback) => callback());
+    subscribers.forEach((subscriber) => subscriber());
   };
 
   const getState = () => state;
 
-  const onUpdate = (callback) => thingsToUpdate.push(callback);
+  const onUpdate = (subscriber) => subscribers.push(subscriber);
 
   return {
     update,
