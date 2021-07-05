@@ -25,7 +25,7 @@ function createStore(books = []) {
         break;
       }
       case LOAD_BOOKS: {
-        state = action.data;
+        state = action.books;
         break;
       }
       default:
@@ -83,7 +83,7 @@ class BookStore {
     if (bookshelf) {
       this.store.update({
         type: LOAD_BOOKS,
-        data: JSON.parse(bookshelf),
+        books: JSON.parse(bookshelf),
       });
     }
   }
@@ -128,10 +128,7 @@ function addBookToDOM(book) {
 
 bookStore.onUpdate(() => {
   list.innerHTML = '';
-  const { books } = bookStore;
-  books.forEach(addBookToDOM);
+  bookStore.books.forEach(addBookToDOM);
 });
 
-window.addEventListener('load', () => {
-  bookStore.loadBooks();
-});
+window.addEventListener('load', () => bookStore.loadBooks());
