@@ -36,9 +36,15 @@ function createStore() {
   };
 }
 
+const STORAGE_KEY = 'bookshelf';
+
 class BookStore {
   constructor() {
-    this.store = createStore();
+    const store = createStore();
+    store.onUpdate(() => {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(store.getState()));
+    });
+    this.store = store;
   }
 
   get books() {
@@ -63,12 +69,8 @@ class BookStore {
     this.store.onUpdate(callback);
   }
 
-  saveBooks() {
-    localStorage.setItem('saved-data', JSON.stringify(this.books));
-  }
-
   loadBooks() {
-    const saved = localStorage.getItem('saved-data');
+    const saved = localStorage.getItem(STORAGE_KEY);
     if (saved) {
       const data = JSON.parse(saved);
       this.store.update({
@@ -120,10 +122,6 @@ bookStore.onUpdate(() => {
   list.innerHTML = '';
   const { books } = bookStore;
   books.forEach(addBookToDOM);
-});
-
-bookStore.onUpdate(() => {
-  bookStore.saveBooks();
 });
 
 window.addEventListener('load', () => {
