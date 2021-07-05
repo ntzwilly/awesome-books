@@ -122,6 +122,10 @@ bookStore.onUpdate(() => {
   books.forEach(addBookToDOM);
 });
 
-bookStore.onUpdate(bookStore.saveBooks);
+bookStore.onUpdate(() => {
+  bookStore.saveBooks();
+});
 
-window.addEventListener('load', bookStore.loadBooks);
+window.addEventListener('load', () => {
+  bookStore.loadBooks();
+});
