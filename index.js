@@ -12,6 +12,7 @@ function generateId() {
 
 function createStore() {
   let state = [];
+  const thingsToUpdate = [];
 
   const update = (action) => {
     if (action.type === ADD_BOOK) {
@@ -19,10 +20,17 @@ function createStore() {
     } else if (action.type === REMOVE_BOOK) {
       state = state.filter((book) => book.id !== action.book.id);
     }
+    thingsToUpdate.forEach((fn) => fn());
   };
+
+  const getState = () => state;
+
+  const onUpdate = (fn) => thingsToUpdate.push(fn);
 
   return {
     update,
+    getState,
+    onUpdate,
   };
 }
 
@@ -50,4 +58,19 @@ form.addEventListener("submit", (event) => {
   const id = generateId();
 
   addBook({ title, author, id });
+});
+
+function addBookToDOM(book) {
+  const node = document.createElement("li");
+  const title = document.createElement("h2");
+  title.innerText = book.title;
+
+  node.appendChild(title);
+  list.appendChild(node);
+}
+
+store.onUpdate(() => {
+  list.innerHTML = "";
+  const books = store.getState();
+  books.forEach(addBookToDOM);
 });
