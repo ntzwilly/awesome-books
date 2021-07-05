@@ -59,15 +59,23 @@ class BookStore {
     });
   }
 
-  loadSavedData(data) {
-    this.store.update({
-      type: LOAD_SAVED_DATA,
-      data,
-    });
-  }
-
   onUpdate(callback) {
     this.store.onUpdate(callback);
+  }
+
+  saveBooks() {
+    localStorage.setItem('saved-data', JSON.stringify(this.books));
+  }
+
+  loadBooks() {
+    const saved = localStorage.getItem('saved-data');
+    if (saved) {
+      const data = JSON.parse(saved);
+      this.store.update({
+        type: LOAD_SAVED_DATA,
+        data,
+      });
+    }
   }
 }
 
@@ -114,14 +122,6 @@ bookStore.onUpdate(() => {
   books.forEach(addBookToDOM);
 });
 
-bookStore.onUpdate(() => {
-  localStorage.setItem('saved-data', JSON.stringify(bookStore.books));
-});
+bookStore.onUpdate(bookStore.saveBooks);
 
-window.addEventListener('load', () => {
-  const saved = localStorage.getItem('saved-data');
-  if (saved) {
-    const json = JSON.parse(saved);
-    bookStore.loadSavedData(json);
-  }
-});
+window.addEventListener('load', bookStore.loadBooks);
