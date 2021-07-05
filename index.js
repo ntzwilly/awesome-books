@@ -1,5 +1,4 @@
-const list = document.getElementById('books');
-const form = document.getElementById('book-entry');
+// State management
 
 const ADD_BOOK = 'ADD_BOOK';
 const REMOVE_BOOK = 'REMOVE_BOOK';
@@ -73,6 +72,11 @@ class BookStore {
 }
 
 const bookStore = new BookStore();
+
+// DOM Manipulation
+
+const list = document.getElementById('books');
+const form = document.getElementById('book-entry');
 
 form.addEventListener('submit', (event) => {
   event.preventDefault();
