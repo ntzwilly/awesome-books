@@ -3,6 +3,7 @@ const form = document.getElementById("book-entry");
 
 const ADD_BOOK = "ADD_BOOK";
 const REMOVE_BOOK = "REMOVE_BOOK";
+const LOAD_SAVED_DATA = "LOAD_SAVED_DATA";
 
 function generateId() {
   return Math.floor((1 + Math.random()) * 0x10000)
@@ -19,6 +20,8 @@ function createStore() {
       state = state.concat([action.book]);
     } else if (action.type === REMOVE_BOOK) {
       state = state.filter((book) => book.id !== action.id);
+    } else if (action.type === LOAD_SAVED_DATA) {
+      state = action.data;
     }
     thingsToUpdate.forEach((fn) => fn());
   };
@@ -47,6 +50,13 @@ function removeBook(id) {
   store.update({
     type: REMOVE_BOOK,
     id,
+  });
+}
+
+function loadSavedData(data) {
+  store.update({
+    type: LOAD_SAVED_DATA,
+    data,
   });
 }
 
@@ -82,4 +92,16 @@ store.onUpdate(() => {
   list.innerHTML = "";
   const books = store.getState();
   books.forEach(addBookToDOM);
+});
+
+store.onUpdate(() => {
+  localStorage.setItem("saved-data", JSON.stringify(store.getState()));
+});
+
+window.addEventListener("load", () => {
+  let saved = localStorage.getItem("saved-data");
+  if (saved) {
+    const json = JSON.parse(saved);
+    loadSavedData(json);
+  }
 });
