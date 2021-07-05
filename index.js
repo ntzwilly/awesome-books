@@ -18,7 +18,7 @@ function createStore() {
     if (action.type === ADD_BOOK) {
       state = state.concat([action.book]);
     } else if (action.type === REMOVE_BOOK) {
-      state = state.filter((book) => book.id !== action.book.id);
+      state = state.filter((book) => book.id !== action.id);
     }
     thingsToUpdate.forEach((fn) => fn());
   };
@@ -67,8 +67,13 @@ function addBookToDOM(book) {
   const subtitle = document.createElement("p");
   subtitle.innerText = book.author;
 
+  const button = document.createElement("button");
+  button.innerText = "Remove";
+  button.addEventListener("click", () => removeBook(book.id));
+
   node.appendChild(title);
   node.appendChild(subtitle);
+  node.appendChild(button);
 
   list.appendChild(node);
 }
