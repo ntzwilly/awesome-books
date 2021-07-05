@@ -37,7 +37,6 @@ function createStore() {
 const store = createStore();
 
 function addBook(book) {
-  console.log(book);
   store.update({
     type: ADD_BOOK,
     book,
@@ -65,7 +64,12 @@ function addBookToDOM(book) {
   const title = document.createElement("h2");
   title.innerText = book.title;
 
+  const subtitle = document.createElement("p");
+  subtitle.innerText = book.author;
+
   node.appendChild(title);
+  node.appendChild(subtitle);
+
   list.appendChild(node);
 }
 
