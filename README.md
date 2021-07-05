@@ -1,4 +1,4 @@
-# Awesome books: plain JavaScript with objects
+# Awesome books
 
 ![Microverse](https://img.shields.io/badge/Microverse-blueviolet)
 
