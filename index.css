@@ -1,0 +1,24 @@
+* {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  padding: 12px;
+}
+
+li {
+  text-decoration: none;
+  border-bottom: 1px solid;
+  padding-bottom: 8px;
+}
+
+input {
+  display: block;
+  margin-bottom: 12px;
+}
+
+form {
+  margin: 12px 0;
+}
