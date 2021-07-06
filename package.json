@@ -4,21 +4,24 @@
   "description": "If you are not familiar with linters, read [root level README](../README.md).",
   "main": "index.js",
   "dependencies": {
+  },
+  "devDependencies": {
+    "hint": "^6.1.4",
+    "stylelint": "^13.13.1",
+    "stylelint-config-standard": "^21.0.0",
+    "stylelint-csstree-validator": "^1.9.0",
+    "stylelint-scss": "^3.19.0",
     "babel-eslint": "^10.1.0",
     "eslint": "^7.30.0",
     "eslint-config-airbnb-base": "^14.2.1",
     "eslint-plugin-import": "^2.23.4"
   },
-  "devDependencies": {
-    "stylelint": "^13.13.1",
-    "stylelint-config-standard": "^21.0.0",
-    "stylelint-csstree-validator": "^1.9.0",
-    "stylelint-scss": "^3.19.0"
-  },
   "scripts": {
     "webhint": "npx hint .",
     "stylelint": "npx stylelint \"**/*.{css,scss}\"",
-    "eslint": "npx eslint ."
+    "eslint": "npx eslint .",
+    "lint": "npm run webhint && npm run stylelint && npm run eslint",
+    "test": "npm run lint"
   },
   "repository": {
     "type": "git",

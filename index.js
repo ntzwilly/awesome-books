@@ -1,9 +1,8 @@
-const list = document.getElementById('books');
-const form = document.getElementById('book-entry');
+// State management
 
 const ADD_BOOK = 'ADD_BOOK';
 const REMOVE_BOOK = 'REMOVE_BOOK';
-const LOAD_SAVED_DATA = 'LOAD_SAVED_DATA';
+const LOAD_BOOKS = 'LOAD_BOOKS';
 
 function generateId() {
   return Math.floor((1 + Math.random()) * 0x10000)
@@ -11,24 +10,33 @@ function generateId() {
     .substring(1);
 }
 
-function createStore() {
-  let state = [];
-  const thingsToUpdate = [];
+function createStore(books = []) {
+  let state = books;
+  const subscribers = [];
 
   const update = (action) => {
-    if (action.type === ADD_BOOK) {
-      state = state.concat([action.book]);
-    } else if (action.type === REMOVE_BOOK) {
-      state = state.filter((book) => book.id !== action.id);
-    } else if (action.type === LOAD_SAVED_DATA) {
-      state = action.data;
+    switch (action.type) {
+      case ADD_BOOK: {
+        state = [...state, action.book];
+        break;
+      }
+      case REMOVE_BOOK: {
+        state = state.filter((book) => book.id !== action.id);
+        break;
+      }
+      case LOAD_BOOKS: {
+        state = action.books;
+        break;
+      }
+      default:
+        break;
     }
-    thingsToUpdate.forEach((fn) => fn());
+    subscribers.forEach((subscriber) => subscriber());
   };
 
   const getState = () => state;
 
-  const onUpdate = (fn) => thingsToUpdate.push(fn);
+  const onUpdate = (subscriber) => subscribers.push(subscriber);
 
   return {
     update,
@@ -37,28 +45,56 @@ function createStore() {
   };
 }
 
-const store = createStore();
+const STORAGE_KEY = 'bookshelf';
 
-function addBook(book) {
-  store.update({
-    type: ADD_BOOK,
-    book,
-  });
+class BookStore {
+  constructor() {
+    const store = createStore();
+    store.onUpdate(() => {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(store.getState()));
+    });
+    this.store = store;
+  }
+
+  get books() {
+    return this.store.getState();
+  }
+
+  addBook(book) {
+    this.store.update({
+      type: ADD_BOOK,
+      book,
+    });
+  }
+
+  removeBook(id) {
+    this.store.update({
+      type: REMOVE_BOOK,
+      id,
+    });
+  }
+
+  onUpdate(callback) {
+    this.store.onUpdate(callback);
+  }
+
+  loadBooks() {
+    const bookshelf = localStorage.getItem(STORAGE_KEY);
+    if (bookshelf && bookshelf !== 'undefined') {
+      this.store.update({
+        type: LOAD_BOOKS,
+        books: JSON.parse(bookshelf),
+      });
+    }
+  }
 }
 
-function removeBook(id) {
-  store.update({
-    type: REMOVE_BOOK,
-    id,
-  });
-}
+const bookStore = new BookStore();
 
-function loadSavedData(data) {
-  store.update({
-    type: LOAD_SAVED_DATA,
-    data,
-  });
-}
+// DOM Manipulation
+
+const list = document.getElementById('books');
+const form = document.getElementById('book-entry');
 
 form.addEventListener('submit', (event) => {
   event.preventDefault();
@@ -66,7 +102,9 @@ form.addEventListener('submit', (event) => {
   const author = form.elements[1].value;
   const id = generateId();
 
-  addBook({ title, author, id });
+  bookStore.addBook({ title, author, id });
+  form.elements[0].value = '';
+  form.elements[1].value = '';
 });
 
 function addBookToDOM(book) {
@@ -79,7 +117,7 @@ function addBookToDOM(book) {
 
   const button = document.createElement('button');
   button.innerText = 'Remove';
-  button.addEventListener('click', () => removeBook(book.id));
+  button.addEventListener('click', () => bookStore.removeBook(book.id));
 
   node.appendChild(title);
   node.appendChild(subtitle);
@@ -88,20 +126,9 @@ function addBookToDOM(book) {
   list.appendChild(node);
 }
 
-store.onUpdate(() => {
+bookStore.onUpdate(() => {
   list.innerHTML = '';
-  const books = store.getState();
-  books.forEach(addBookToDOM);
+  bookStore.books.forEach(addBookToDOM);
 });
 
-store.onUpdate(() => {
-  localStorage.setItem('saved-data', JSON.stringify(store.getState()));
-});
-
-window.addEventListener('load', () => {
-  const saved = localStorage.getItem('saved-data');
-  if (saved) {
-    const json = JSON.parse(saved);
-    loadSavedData(json);
-  }
-});
+window.addEventListener('load', () => bookStore.loadBooks());

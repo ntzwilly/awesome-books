@@ -1,10 +1,10 @@
-# Awesome books: plain JavaScript with objects
+# Awesome books
 
 ![Microverse](https://img.shields.io/badge/Microverse-blueviolet)
 
 > Simple book store website
 
-![Screenshot](https://user-images.githubusercontent.com/10219539/124446690-8f9a4c00-dd78-11eb-94ae-45abf45b5c42.png);
+![Screenshot](https://user-images.githubusercontent.com/10219539/124446690-8f9a4c00-dd78-11eb-94ae-45abf45b5c42.png)
 
 In this project, we built a basic website that allows users to add/remove books from a list.
 
