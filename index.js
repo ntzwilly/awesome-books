@@ -130,4 +130,11 @@ bookStore.onUpdate(() => {
   bookStore.books.forEach(addBookToDOM);
 });
 
-window.addEventListener('load', () => bookStore.loadBooks());
+window.addEventListener('load', () => {
+  // eslint-disable-next-line no-undef
+  const { DateTime } = luxon;
+  const now = DateTime.now();
+  document.getElementById('date').innerText = now.toLocaleString(DateTime.DATETIME_MED);
+
+  bookStore.loadBooks();
+});
