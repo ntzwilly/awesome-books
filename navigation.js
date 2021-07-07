@@ -17,3 +17,8 @@ links.forEach((link) => {
     }
   });
 });
+
+// eslint-disable-next-line no-undef 
+const { DateTime } = luxon; 
+const now = DateTime.now(); 
+document.getElementById('date').innerText = now.toLocaleString(DateTime.DATETIME_MED) 
