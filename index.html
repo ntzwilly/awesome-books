@@ -5,18 +5,29 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Awesome Books</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="index.css" />
   </head>
   <body>
-    <h1> All Awesome Books</h1>
-    <ul id="books"></ul>
-    <div></div>
-    <form id="book-entry">
-      <h2>Add a new book</h2>
-      <input type="text" placeholder="Title" required />
-      <input type="text" placeholder="Author" required />
-      <button type="submit">Add</button>
-    </form>
+      <h1 class="text-center mb-12">All awesome books</h1>
+      <ul id="books"></ul>
+      <div class="container">
+        <div class="divider my-12"></div>
+        <form id="book-entry">
+          <h2 class="text-center mb-12">Add a new book</h2>
+          <input type="text" placeholder="Title" required />
+          <input type="text" placeholder="Author" required />
+          <div class="justify-right">
+            <button class="button" type="submit">Add</button>
+          </div>
+        </form>
+      </div>
     <script src="index.js"></script>
   </body>
 </html>
