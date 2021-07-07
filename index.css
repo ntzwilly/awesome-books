@@ -2,6 +2,7 @@
   list-style: none;
   padding: 0;
   margin: 0;
+  font-family: "Poppins", sans-serif;
 }
 
 body {
@@ -10,15 +11,99 @@ body {
 
 li {
   text-decoration: none;
-  border-bottom: 1px solid;
-  padding-bottom: 8px;
+  padding: 8px;
 }
 
 input {
   display: block;
   margin-bottom: 12px;
+  padding: 12px;
+  border: 1px solid;
 }
 
-form {
-  margin: 12px 0;
+#book-entry {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-self: center;
+}
+
+#books {
+  border-width: 1px;
+  border-style: solid;
+}
+
+.book-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.book-item:nth-child(odd) {
+  background-color: lightgrey;
+}
+
+.button {
+  border: none;
+  background-color: royalblue;
+  padding: 16px;
+  height: 48px;
+  color: white;
+}
+
+.button:hover {
+  cursor: pointer;
+  opacity: 0.9;
+}
+
+.small-button {
+  padding: 0 16px;
+  height: 32px;
+}
+
+.divider {
+  background-color: gray;
+  height: 1px;
+  margin: 40px 0;
+  width: 20%;
+  align-self: center;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Align */
+
+.justify-right {
+  align-self: flex-end;
+}
+
+.text-center {
+  text-align: center;
+}
+
+/* Colors */
+
+.bg-danger {
+  background-color: red;
+}
+
+/* Spacing */
+
+.mb-12 {
+  margin-bottom: 12px;
+}
+
+.my-20 {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+/* Large screen devices */
+@media screen and (min-width: 992px) {
+  #book-entry {
+    width: 50%;
+  }
 }

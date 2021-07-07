@@ -2,11 +2,11 @@
 
 ![Microverse](https://img.shields.io/badge/Microverse-blueviolet)
 
-> Simple book store website
+> Awesome books: style core elements
 
-![Screenshot](https://user-images.githubusercontent.com/10219539/124446690-8f9a4c00-dd78-11eb-94ae-45abf45b5c42.png)
+![screen](https://user-images.githubusercontent.com/9049260/124728174-a6bf7200-df0f-11eb-966a-89ca187f0389.png)
 
-In this project, we built a basic website that allows users to add/remove books from a list.
+In this project, we built to the application to make it match the wireframe.
 
 ## Built With
 
