@@ -10,7 +10,7 @@ body {
   padding: 12px;
   position: relative;
   background-color: #f4f5f7;
-  /* margin-top: 48px; */
+  margin-top: 48px;
 }
 
 li {
@@ -72,7 +72,15 @@ input {
   padding: 48px 0;
 }
 
+header {
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
+}
+
 .navbar {
+  margin: 12px;
   display: flex;
   align-items: center;
   justify-content: space-between;
