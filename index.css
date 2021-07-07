@@ -46,6 +46,10 @@ input {
   align-items: center;
 }
 
+.book-item:nth-child(odd) {
+  background-color: lightgrey;
+}
+
 .button {
   border: none;
   background-color: royalblue;
