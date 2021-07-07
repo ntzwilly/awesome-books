@@ -7,7 +7,10 @@ links.forEach((link) => {
     link.classList.add('active');
     const id = link.getAttribute('href').slice('1');
 
-    document.querySelector('.current-page').classList.remove('current-page');
+    const currentSection = document.querySelector('.current-page');
+    if (currentSection) {
+      currentSection.classList.remove('current-page');
+    }
     const section = document.getElementById(id);
     if (section) {
       section.classList.add('current-page');
