@@ -61,17 +61,10 @@ input {
   height: 32px;
 }
 
-.divider {
-  background-color: gray;
-  height: 1px;
-  margin: 40px 0;
-  width: 20%;
-  align-self: center;
-}
-
 .container {
   display: flex;
   flex-direction: column;
+  gap: 40px;
 }
 
 /* Align */
