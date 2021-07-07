@@ -117,6 +117,12 @@ header {
   color: royalblue;
 }
 
+.date-container {
+  display: flex;
+  justify-content: flex-end;
+  margin-right: 12px;
+}
+
 /* Align */
 
 .justify-right {
