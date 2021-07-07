@@ -101,7 +101,6 @@ input {
   margin-bottom: 20px;
 }
 
-
 /* Large screen devices */
 @media screen and (min-width: 992px) {
   #book-entry {
