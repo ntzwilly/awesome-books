@@ -1,4 +1,3 @@
-const sections = document.querySelectorAll('.container');
 const links = document.querySelectorAll('.nav-link');
 
 links.forEach((link) => {
@@ -6,5 +5,12 @@ links.forEach((link) => {
     event.preventDefault();
     document.querySelector('.active').classList.remove('active');
     link.classList.add('active');
+    const id = link.getAttribute('href').slice('1');
+
+    document.querySelector('.current-page').classList.remove('current-page');
+    const section = document.getElementById(id);
+    if (section) {
+      section.classList.add('current-page');
+    }
   });
 });
