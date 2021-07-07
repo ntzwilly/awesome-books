@@ -109,18 +109,16 @@ form.addEventListener('submit', (event) => {
 
 function addBookToDOM(book) {
   const node = document.createElement('li');
-  const title = document.createElement('h2');
-  title.innerText = book.title;
-
-  const subtitle = document.createElement('p');
-  subtitle.innerText = book.author;
+  const title = document.createElement('h5');
+  title.innerText = `"${book.title}" by ${book.author}`;
 
   const button = document.createElement('button');
   button.innerText = 'Remove';
   button.addEventListener('click', () => bookStore.removeBook(book.id));
+  button.classList.add('button', 'bg-danger', 'small-button');
 
+  node.classList.add('book-item');
   node.appendChild(title);
-  node.appendChild(subtitle);
   node.appendChild(button);
 
   list.appendChild(node);

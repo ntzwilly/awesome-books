@@ -39,3 +39,26 @@ input {
   border-width: 1px;
   border-style: solid;
 }
+
+.book-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.button {
+  border: none;
+  background-color: royalblue;
+  padding: 16px;
+  height: 48px;
+  color: white;
+}
+
+.small-button {
+  padding: 0 16px;
+  height: 32px;
+}
+
+.bg-danger {
+  background-color: red;
+}
