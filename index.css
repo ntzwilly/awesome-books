@@ -22,17 +22,10 @@ input {
 }
 
 #book-entry {
-  margin: 12px 0;
   display: flex;
   flex-direction: column;
-}
-
-.justify-right {
-  align-self: flex-end;
-}
-
-.text-center {
-  text-align: center;
+  width: 50%;
+  align-self: center;
 }
 
 #books {
@@ -58,13 +51,14 @@ input {
   color: white;
 }
 
+.button:hover {
+  cursor: pointer;
+  opacity: 0.9;
+}
+
 .small-button {
   padding: 0 16px;
   height: 32px;
-}
-
-.bg-danger {
-  background-color: red;
 }
 
 .divider {
@@ -72,4 +66,37 @@ input {
   height: 1px;
   margin: 40px 0;
   width: 20%;
+  align-self: center;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Align */
+
+.justify-right {
+  align-self: flex-end;
+}
+
+.text-center {
+  text-align: center;
+}
+
+/* Colors */
+
+.bg-danger {
+  background-color: red;
+}
+
+/* Spacing */
+
+.mb-12 {
+  margin-bottom: 12px;
+}
+
+.my-20 {
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
