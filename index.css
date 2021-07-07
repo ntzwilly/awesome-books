@@ -47,6 +47,10 @@ input {
   background-color: lightgrey;
 }
 
+.book-title {
+  font-weight: 500;
+}
+
 .button {
   border: none;
   background-color: royalblue;

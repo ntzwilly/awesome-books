@@ -111,6 +111,7 @@ function addBookToDOM(book) {
   const node = document.createElement('li');
   const title = document.createElement('h5');
   title.innerText = `"${book.title}" by ${book.author}`;
+  title.classList.add('book-title');
 
   const button = document.createElement('button');
   button.innerText = 'Remove';
