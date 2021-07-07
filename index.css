@@ -11,18 +11,31 @@ body {
 
 li {
   text-decoration: none;
-  border-bottom: 1px solid;
-  padding-bottom: 8px;
+  padding: 8px;
 }
 
 input {
   display: block;
   margin-bottom: 12px;
+  padding: 12px;
+  border: 1px solid;
 }
 
-form {
+#book-entry {
   margin: 12px 0;
+  display: flex;
+  flex-direction: column;
 }
 
-.header-1 {
+.justify-right {
+  align-self: flex-end;
+}
+
+.text-center {
+  text-align: center;
+}
+
+#books {
+  border-width: 1px;
+  border-style: solid;
 }
