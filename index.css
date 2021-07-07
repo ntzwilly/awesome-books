@@ -67,6 +67,7 @@ input {
   display: flex;
   flex-direction: column;
   gap: 30px;
+  padding: 48px 0;
 }
 
 .navbar {
@@ -74,7 +75,7 @@ input {
   align-items: center;
   justify-content: space-between;
   height: 48px;
-  padding: 5px 12px;
+  padding: 5px 24px;
   background-color: white;
   filter: drop-shadow(0 0 16px rgba(64, 83, 252, 0.24));
 }
@@ -90,6 +91,10 @@ input {
 
 .nav-link {
   color: inherit;
+}
+
+.active {
+  color: royalblue;
 }
 
 /* Align */
